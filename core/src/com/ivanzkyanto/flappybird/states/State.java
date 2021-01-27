@@ -1,4 +1,4 @@
-package com.ivanzkyanto.flappybird.States;
+package com.ivanzkyanto.flappybird.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,4 +19,5 @@ public abstract class State {
     protected abstract void handleInput();
     public abstract void update(float dt); // dt = Delta Time
     public abstract void render(SpriteBatch sb);
+    public abstract void dispose();
 }

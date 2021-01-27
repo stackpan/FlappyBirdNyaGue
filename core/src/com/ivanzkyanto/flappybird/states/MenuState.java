@@ -1,5 +1,7 @@
-package com.ivanzkyanto.flappybird.States;
+package com.ivanzkyanto.flappybird.states;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ivanzkyanto.flappybird.MyGame;
@@ -17,12 +19,15 @@ public class MenuState extends State {
 
     @Override
     public void handleInput() {
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            gsm.set(new PlayState(gsm));
+            dispose();
+        }
     }
 
     @Override
     public void update(float dt) {
-
+        handleInput();
     }
 
     @Override
@@ -31,5 +36,11 @@ public class MenuState extends State {
         sb.draw(background, 0, 0, MyGame.WIDTH, MyGame.HEIGHT);
         sb.draw(playBtn, (MyGame.WIDTH/2) - (playBtn.getWidth()/2), (MyGame.HEIGHT/2) - playBtn.getHeight()/2);
         sb.end();
+    }
+
+    @Override
+    public void dispose() {
+        background.dispose();
+        playBtn.dispose();
     }
 }

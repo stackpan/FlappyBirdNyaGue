@@ -12,4 +12,5 @@ public class DesktopLauncher {
 		config.title = MyGame.TITLE;
 		new LwjglApplication(new MyGame(), config);
 	}
+
 }
