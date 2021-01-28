@@ -9,8 +9,8 @@ import com.ivanzkyanto.flappybird.states.MenuState;
 
 public class MyGame extends ApplicationAdapter {
 
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 	public static final String TITLE = "Flappy Bird";
 
 	private SpriteBatch batch;
@@ -27,7 +27,7 @@ public class MyGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.update(Gdx.graphics.getDeltaTime() * 11/10);
 		gsm.render(batch);
 	}
 

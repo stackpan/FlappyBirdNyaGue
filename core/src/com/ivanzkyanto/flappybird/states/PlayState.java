@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.ivanzkyanto.flappybird.MyGame;
 import com.ivanzkyanto.flappybird.sprites.Bird;
@@ -15,8 +16,11 @@ public class PlayState extends State {
 
     private Bird bird;
     private Texture bg;
+    private TextureRegion backgroundRegion;
 
     private Array<Tube> tubes;
+
+    private float bgMoveX;
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
@@ -24,11 +28,15 @@ public class PlayState extends State {
         bird = new Bird(40, 200);
         cam.setToOrtho(false, MyGame.WIDTH / 2, MyGame.HEIGHT / 2);
         bg = new Texture("bg.png");
+        bg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
+        backgroundRegion = new TextureRegion(bg, 0,0, MyGame.WIDTH, bg.getHeight());
         tubes = new Array<Tube>();
 
         for (int i = 0; i < TUBE_COUNT; i++) {
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
         }
+
+        bgMoveX = 0;
     }
 
     @Override
@@ -48,13 +56,15 @@ public class PlayState extends State {
             }
         }
         cam.update();
+
+        bgMoveX = cam.position.x - 100;
     }
 
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(bg, cam.position.x - (cam.viewportWidth / 2), 0);
+        sb.draw(backgroundRegion, cam.position.x - (cam.viewportWidth / 2), 0);
 
         for (Tube tube : tubes) {
             sb.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosBotTube().y);
