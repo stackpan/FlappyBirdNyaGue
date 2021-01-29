@@ -1,7 +1,7 @@
 package com.ivanzkyanto.flappybird.sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bird {
@@ -11,11 +11,13 @@ public class Bird {
     private Vector2 position;
     private Vector2 velocity; // Velocity = kecepatan
     private Texture bird;
+    private Rectangle bounds;
 
     public Bird(int x, int y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0); // Kecepatan awal
         bird = new Texture("bird.png");
+        bounds = new Rectangle(x, y, bird.getWidth(), bird.getHeight());
     }
 
     public void update(float dt, float camViewportHeight) {
@@ -25,6 +27,7 @@ public class Bird {
         if (position.y > (camViewportHeight - bird.getHeight())) position.y = (camViewportHeight - bird.getHeight());
         if (position.y < 0) position.y = 0;
         velocity.scl(1/dt);
+        bounds.setPosition(position.x, position.y);
     }
 
     public void jump() {
@@ -37,5 +40,9 @@ public class Bird {
 
     public Texture getTexture() {
         return bird;
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
     }
 }
