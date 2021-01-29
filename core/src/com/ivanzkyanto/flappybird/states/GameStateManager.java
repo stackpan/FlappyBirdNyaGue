@@ -9,7 +9,7 @@ public class GameStateManager {
     private Stack<State> states;
 
     public GameStateManager() {
-        states = new Stack<State>();
+        states = new Stack<>();
     }
 
     public void push(State state) {
@@ -17,11 +17,11 @@ public class GameStateManager {
     }
 
     public void pop() {
-        states.pop();
+        states.pop().dispose();
     }
 
     public void set(State state) {
-        states.pop();
+        states.pop().dispose();
         states.push(state);
     }
 

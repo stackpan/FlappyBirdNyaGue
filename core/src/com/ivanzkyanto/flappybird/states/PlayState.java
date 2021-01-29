@@ -20,8 +20,6 @@ public class PlayState extends State {
 
     private Array<Tube> tubes;
 
-    private float bgMoveX;
-
     protected PlayState(GameStateManager gsm) {
         super(gsm);
 
@@ -35,8 +33,6 @@ public class PlayState extends State {
         for (int i = 0; i < TUBE_COUNT; i++) {
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH) + bird.getPosition().x * 6));
         }
-
-        bgMoveX = 0;
     }
 
     @Override
@@ -50,16 +46,17 @@ public class PlayState extends State {
         bird.update(dt, cam.viewportHeight);
         cam.position.x = bird.getPosition().x + 80;
 
-        for (Tube tube : tubes) {
+        for (int i = 0; i < tubes.size; i++) {
+            Tube tube = tubes.get(i);
+
             if (cam.position.x - (cam.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
 
             if (tube.collides(bird.getBounds())) gsm.set(new PlayState(gsm));
         }
-        cam.update();
 
-        bgMoveX = cam.position.x - 100;
+        cam.update();
     }
 
     @Override
@@ -80,7 +77,10 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        bird.dispose();
+        for (Tube tube : tubes) tube.dispose();
+        System.out.println("Play state disposed");
     }
 
 //    private void debug() {

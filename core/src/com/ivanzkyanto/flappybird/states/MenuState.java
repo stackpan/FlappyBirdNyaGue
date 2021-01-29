@@ -25,7 +25,6 @@ public class MenuState extends State {
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             gsm.set(new PlayState(gsm));
-            dispose();
         }
     }
 
@@ -46,5 +45,6 @@ public class MenuState extends State {
     public void dispose() {
         background.dispose();
         playBtn.dispose();
+        System.out.println("Menu state disposed");
     }
 }

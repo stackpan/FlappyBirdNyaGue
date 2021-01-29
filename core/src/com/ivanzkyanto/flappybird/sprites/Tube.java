@@ -10,7 +10,7 @@ public class Tube {
     public static final int TUBE_WIDTH = 52;
 
     private static final int FLUCTUATION = 120; // Jarak yang bisa dirandom
-    private static final int TUBE_GAP = 130; // Jarak celah antara Tube atas dgn Tube bawah
+    private static final int TUBE_GAP = 90; // Jarak celah antara Tube atas dgn Tube bawah
     private static final int LOWEST_OPENING = 40;
     private Texture topTube, botTube;
     private Vector2 posTopTube, posBotTube;
@@ -60,5 +60,10 @@ public class Tube {
 
     public boolean collides(Rectangle player) {
         return player.overlaps(boundsTop) || player.overlaps(boundsBot);
+    }
+
+    public void dispose() {
+        topTube.dispose();
+        botTube.dispose();
     }
 }
