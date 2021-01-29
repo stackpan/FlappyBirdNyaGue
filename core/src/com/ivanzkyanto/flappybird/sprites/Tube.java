@@ -11,7 +11,7 @@ public class Tube {
 
     private static final int FLUCTUATION = 120; // Jarak yang bisa dirandom
     private static final int TUBE_GAP = 90; // Jarak celah antara Tube atas dgn Tube bawah
-    private static final int LOWEST_OPENING = 40;
+    private static final int LOWEST_OPENING = 70;
     private Texture topTube, botTube;
     private Vector2 posTopTube, posBotTube;
     private Rectangle boundsTop, boundsBot;
