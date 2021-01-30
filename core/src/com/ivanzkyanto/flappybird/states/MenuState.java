@@ -11,13 +11,10 @@ public class MenuState extends State {
 
     private Texture background;
     private Texture playBtn;
-    private TextureRegion backgroundRegion;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
         background = new Texture("bg.png"); // Resource sementara
-        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
-        backgroundRegion = new TextureRegion(background,0,0, MyGame.WIDTH, background.getHeight());
         playBtn = new Texture("playbtn.png"); // Ini juga
     }
 
@@ -36,7 +33,7 @@ public class MenuState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(backgroundRegion, 0, 0, MyGame.WIDTH, MyGame.HEIGHT);
+        sb.draw(background, 0, 0, MyGame.WIDTH, MyGame.HEIGHT);
         sb.draw(playBtn, (MyGame.WIDTH/2) - (playBtn.getWidth()/2), (MyGame.HEIGHT/2) - playBtn.getHeight()/2);
         sb.end();
     }
