@@ -2,6 +2,7 @@ package com.ivanzkyanto.flappybird;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ivanzkyanto.flappybird.states.GameStateManager;
@@ -15,11 +16,17 @@ public class MyGame extends ApplicationAdapter {
 
 	private SpriteBatch batch;
 	private GameStateManager gsm;
+
+	private Music music;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
+		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+		music.setLooping(true);
+		music.setVolume(0.1f);
+		music.play();
 		Gdx.gl.glClearColor(0.5f, 0.2f, 1f, 1);
 		gsm.push(new MenuState(gsm));
 	}
@@ -34,5 +41,6 @@ public class MyGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		music.dispose();
 	}
 }
