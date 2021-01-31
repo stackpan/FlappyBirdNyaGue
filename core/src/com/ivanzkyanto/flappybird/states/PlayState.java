@@ -31,8 +31,8 @@ public class PlayState extends State {
 
         bird = new Bird(40, 200);
         cam.setToOrtho(false, MyGame.WIDTH / 2f, MyGame.HEIGHT / 2f);
-        bg = new Texture("bg.png");
-        ground = new Texture("ground.png");
+        bg = new Texture("textures/bg.png");
+        ground = new Texture("textures/ground.png");
         tubes = new Array<>();
 
         bgPos1 = new Vector2(cam.position.x - (cam.viewportWidth / 2) + BG_X_START_OFFSET, 0);

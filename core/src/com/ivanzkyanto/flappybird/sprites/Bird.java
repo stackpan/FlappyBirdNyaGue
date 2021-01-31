@@ -22,10 +22,10 @@ public class Bird {
     public Bird(int x, int y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0); // Kecepatan awal
-        texture = new Texture("birdanimation.png");
+        texture = new Texture("textures/birdanimation.png");
         birdAnimation = new Animation(new TextureRegion(texture), 3, 0.25f);
         bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
-        flap = Gdx.audio.newSound(Gdx.files.internal("sfx_pop.mp3"));
+        flap = Gdx.audio.newSound(Gdx.files.internal("sounds/sfx_pop.mp3"));
     }
 
     public void update(float dt, float camViewportHeight) {
