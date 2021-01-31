@@ -1,6 +1,7 @@
 package com.ivanzkyanto.flappybird.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -12,19 +13,23 @@ public class Bird {
     private Vector2 velocity; // Velocity = kecepatan
     private Texture bird;
     private Rectangle bounds;
+    private Animation birdAnimation;
+    private Texture texture;
 
     public Bird(int x, int y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0); // Kecepatan awal
-        bird = new Texture("bird.png");
-        bounds = new Rectangle(x, y, bird.getWidth(), bird.getHeight());
+        texture = new Texture("birdanimation.png");
+        birdAnimation = new Animation(new TextureRegion(texture), 3, 0.25f);
+        bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
     }
 
     public void update(float dt, float camViewportHeight) {
+        birdAnimation.update(dt);
         if (position.y > 0) velocity.add(0, GRAVITY);
         velocity.scl(dt);
         position.add(MOVEMENT * dt, velocity.y);
-        if (position.y > (camViewportHeight - bird.getHeight())) position.y = (camViewportHeight - bird.getHeight());
+        if (position.y > (camViewportHeight - texture.getHeight())) position.y = (camViewportHeight - texture.getHeight());
         if (position.y < 0) position.y = 0;
         velocity.scl(1/dt);
         bounds.setPosition(position.x, position.y);
@@ -38,8 +43,8 @@ public class Bird {
         return position;
     }
 
-    public Texture getTexture() {
-        return bird;
+    public TextureRegion getTexture() {
+        return birdAnimation.getFrame();
     }
 
     public Rectangle getBounds() {
@@ -47,6 +52,6 @@ public class Bird {
     }
 
     public void dispose() {
-        bird.dispose();
+        texture.dispose();
     }
 }

@@ -65,12 +65,10 @@ public class PlayState extends State {
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
 
-//            if (tube.collides(bird.getBounds())) gsm.set(new PlayState(gsm));
+            if (tube.collides(bird.getBounds())) gsm.set(new PlayState(gsm));
         }
 
         if (bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET) gsm.set(new PlayState(gsm));
-
-        if (bird.getPosition().y <= 100) bird.jump();
 
         bgPos1.add(1, 0);
         bgPos2.add(1, 0);
